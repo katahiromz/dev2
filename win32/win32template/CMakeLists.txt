@@ -13,6 +13,6 @@ project(win32template C CXX)
 
 # win32template.exe
 add_executable(win32template main.cpp)
-#target_link_libraries(win32template ...)
+target_link_libraries(win32template comctl32 comdlg32 shell32 shlwapi)
 
 ##############################################################################

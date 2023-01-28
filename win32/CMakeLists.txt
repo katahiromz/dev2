@@ -43,6 +43,7 @@ endif()
 
 ##############################################################################
 
+add_subdirectory(CreateDirectory)
 add_subdirectory(DeleteFile)
 add_subdirectory(MessageBox)
 add_subdirectory(win32template)

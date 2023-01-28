@@ -7,12 +7,12 @@
 cmake_minimum_required(VERSION 3.0)
 
 # project name and languages
-project(MessageBox C CXX)
+project(CreateDirectory C CXX)
 
 ##############################################################################
 
-# MessageBox.exe
-add_executable(MessageBox main.cpp)
-target_link_libraries(MessageBox comctl32 comdlg32 shell32 shlwapi)
+# CreateDirectory.exe
+add_executable(CreateDirectory main.cpp)
+target_link_libraries(CreateDirectory comctl32 comdlg32 shell32 shlwapi)
 
 ##############################################################################

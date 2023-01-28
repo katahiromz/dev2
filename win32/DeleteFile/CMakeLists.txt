@@ -13,6 +13,6 @@ project(DeleteFile C CXX)
 
 # DeleteFile.exe
 add_executable(DeleteFile main.cpp)
-#target_link_libraries(DeleteFile ...)
+target_link_libraries(DeleteFile comctl32 comdlg32 shell32 shlwapi)
 
 ##############################################################################
