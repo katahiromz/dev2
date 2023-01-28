@@ -13,7 +13,7 @@ int main(int argc, char **argv)
 {
     if (MessageBoxA(NULL, "Please press OK", "Hello", MB_OKCANCEL) == IDOK)
     {
-        MessageBoxW(NULL, L"You pressed OK", L"Thank you!", MB_ICONINFORMATION);
+        MessageBoxW(NULL, L"You pressed OK \u2764", L"Thank you!", MB_ICONINFORMATION);
     }
     else
     {
