@@ -48,6 +48,7 @@ add_subdirectory(DeleteFile)
 add_subdirectory(FindFirstFile)
 add_subdirectory(GetModuleFileName)
 add_subdirectory(MessageBox)
+add_subdirectory(ShellExecute)
 add_subdirectory(win32template)
 
 ##############################################################################
