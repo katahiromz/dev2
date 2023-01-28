@@ -43,5 +43,6 @@ endif()
 
 add_subdirectory(stdc)
 add_subdirectory(stdcxx)
+add_subdirectory(win32)
 
 ##############################################################################

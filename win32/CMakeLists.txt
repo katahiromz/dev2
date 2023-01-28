@@ -41,8 +41,6 @@ endif()
 
 ##############################################################################
 
-add_subdirectory(cxxtemplate)
-add_subdirectory(sort)
-add_subdirectory(string)
+add_subdirectory(win32template)
 
 ##############################################################################
