@@ -13,7 +13,17 @@
 int main(int argc, char **argv)
 {
     WIN32_FIND_DATAA find;
-    HANDLE hFind = FindFirstFileA("..\\*", &find);
+    HANDLE hFind;
+
+    if (argc == 2)
+    {
+        hFind = FindFirstFileA(argv[1], &find);
+    }
+    else
+    {
+        hFind = FindFirstFileA("..\\*", &find);
+    }
+
     if (hFind == INVALID_HANDLE_VALUE)
     {
         printf("Cannot found\n");
