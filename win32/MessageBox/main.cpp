@@ -8,6 +8,7 @@
 #include <commctrl.h>
 #include <commdlg.h>
 #include <shlwapi.h>
+#include <tchar.h>
 
 int main(int argc, char **argv)
 {
