@@ -30,7 +30,7 @@ int main(int argc, char **argv)
         {
             printf("file: '%s'\n", find.cFileName);
         }
-    } while (FindNextFile(hFind, &find));
+    } while (FindNextFileA(hFind, &find));
 
     FindClose(hFind);
 
