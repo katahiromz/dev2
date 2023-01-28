@@ -13,6 +13,11 @@
 
 int main(int argc, char **argv)
 {
+    if (argc == 2)
+    {
+        return !CreateDirectoryA(argv[1], NULL);
+    }
+
     RemoveDirectoryA("MyDir1");
     RemoveDirectoryW(L"MyDir2");
     RemoveDirectory(TEXT("MyDir3"));
