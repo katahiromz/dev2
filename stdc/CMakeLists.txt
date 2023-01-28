@@ -14,29 +14,31 @@ set(CMAKE_BINARY_DIR ${CMAKE_SOURCE_DIR}/build)
 set(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR})
 set(LIBRARY_OUTPUT_PATH ${CMAKE_BINARY_DIR})
 
-# staticaly link
-if (CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
-    # using Clang
-    set(CMAKE_C_FLAGS "-static")
-    set(CMAKE_CXX_FLAGS "-static")
-elseif (CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
-    # using GCC
-    set(CMAKE_C_FLAGS "-static")
-    set(CMAKE_CXX_FLAGS "-static")
-elseif (MSVC)
-    # replace "/MD" with "/MT" (building without runtime DLLs)
-    set(CompilerFlags
-        CMAKE_C_FLAGS
-        CMAKE_C_FLAGS_DEBUG
-        CMAKE_C_FLAGS_RELEASE
-        CMAKE_C_FLAGS_RELWITHDEBINFO
-        CMAKE_CXX_FLAGS
-        CMAKE_CXX_FLAGS_DEBUG
-        CMAKE_CXX_FLAGS_RELEASE
-        CMAKE_CXX_FLAGS_RELWITHDEBINFO)
-    foreach(CompilerFlags ${CompilerFlags})
-        string(REPLACE "/MD" "/MT" ${CompilerFlags} "${${CompilerFlags}}")
-    endforeach()
+if(WIN32)
+    # staticaly link
+    if (CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
+        # using Clang
+        set(CMAKE_C_FLAGS "-static")
+        set(CMAKE_CXX_FLAGS "-static")
+    elseif (CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
+        # using GCC
+        set(CMAKE_C_FLAGS "-static")
+        set(CMAKE_CXX_FLAGS "-static")
+    elseif (MSVC)
+        # replace "/MD" with "/MT" (building without runtime DLLs)
+        set(CompilerFlags
+            CMAKE_C_FLAGS
+            CMAKE_C_FLAGS_DEBUG
+            CMAKE_C_FLAGS_RELEASE
+            CMAKE_C_FLAGS_RELWITHDEBINFO
+            CMAKE_CXX_FLAGS
+            CMAKE_CXX_FLAGS_DEBUG
+            CMAKE_CXX_FLAGS_RELEASE
+            CMAKE_CXX_FLAGS_RELWITHDEBINFO)
+        foreach(CompilerFlags ${CompilerFlags})
+            string(REPLACE "/MD" "/MT" ${CompilerFlags} "${${CompilerFlags}}")
+        endforeach()
+    endif()
 endif()
 
 ##############################################################################
