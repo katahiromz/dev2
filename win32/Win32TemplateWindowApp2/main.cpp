@@ -4,6 +4,8 @@ HINSTANCE g_hInstance = NULL;
 HWND g_hMainWnd = NULL;
 HWND g_hCanvasWnd = NULL;
 HWND g_hStatusBar = NULL;
+HWND g_hToolbar = NULL;
+BOOL g_bShowToolbar = TRUE;
 
 string_t LoadStringDx(INT id)
 {
@@ -29,6 +31,15 @@ BOOL OnCreate(HWND hwnd, LPCREATESTRUCT lpCreateStruct)
     g_hCanvasWnd = CreateCanvasDx(hwnd);
     if (!g_hCanvasWnd)
         return FALSE;
+
+    g_hToolbar = CreateToolbarDx(hwnd);
+    if (!g_hToolbar)
+        return FALSE;
+
+    if (g_bShowToolbar)
+    {
+        ::ShowWindow(g_hToolbar, SW_SHOWNOACTIVATE);
+    }
 
     ::PostMessage(hwnd, WM_SIZE, 0, 0);
     ::PostMessage(hwnd, WM_COMMAND, ID_READY, 0);
@@ -87,16 +98,35 @@ void OnCommand(HWND hwnd, int id, HWND hwndCtl, UINT codeNotify)
     }
 }
 
+LRESULT OnNotify(HWND hwnd, int idFrom, LPNMHDR pnmhdr)
+{
+    switch (pnmhdr->code)
+    {
+    case TTN_NEEDTEXT:
+        {
+            LPTOOLTIPTEXT pTTT = LPTOOLTIPTEXT(pnmhdr);
+            OnToolbarNeedText(pTTT);
+            return 0;
+        }
+    }
+    return 0;
+}
+
 void OnSize(HWND hwnd, UINT state, int cx, int cy)
 {
     RECT rc;
     ::GetClientRect(hwnd, &rc);
 
     ::SendMessage(g_hStatusBar, WM_SIZE, 0, 0);
+    ::SendMessage(g_hToolbar, TB_AUTOSIZE, 0, 0);
 
     RECT rcStatus;
     ::GetWindowRect(g_hStatusBar, &rcStatus);
     rc.bottom -= rcStatus.bottom - rcStatus.top;
+
+    RECT rcTool;
+    ::GetWindowRect(g_hToolbar, &rcTool);
+    rc.top += rcTool.bottom - rcTool.top;
 
     ::MoveWindow(g_hCanvasWnd, rc.left, rc.top, rc.right - rc.left, rc.bottom - rc.top, TRUE);
 }
@@ -113,6 +143,11 @@ void OnDestroy(HWND hwnd)
         ::DestroyWindow(g_hCanvasWnd);
         g_hCanvasWnd = NULL;
     }
+    if (g_hToolbar)
+    {
+        ::DestroyWindow(g_hToolbar);
+        g_hToolbar = NULL;
+    }
     ::PostQuitMessage(0);
 }
 
@@ -123,6 +158,7 @@ WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
     {
         HANDLE_MSG(hwnd, WM_CREATE, OnCreate);
         HANDLE_MSG(hwnd, WM_COMMAND, OnCommand);
+        HANDLE_MSG(hwnd, WM_NOTIFY, OnNotify);
         HANDLE_MSG(hwnd, WM_SIZE, OnSize);
         HANDLE_MSG(hwnd, WM_DESTROY, OnDestroy);
     default:

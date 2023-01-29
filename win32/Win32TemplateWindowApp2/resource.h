@@ -11,7 +11,27 @@
 #define IDR_MAINMENU                        100
 
 #define IDS_APPNAME                         100
-#define IDS_READY                           101
+#define IDS_EXIT                            101
+#define IDS_ABOUT                           102
+#define IDS_TEST1                           103
+#define IDS_TEST2                           104
+#define IDS_TEST3                           105
+#define IDS_NEW                             106
+#define IDS_OPEN                            107
+#define IDS_SAVE                            108
+#define IDS_PRINTPREVIEW                    109
+#define IDS_PRINT                           110
+#define IDS_UNDO                            111
+#define IDS_REDO                            112
+#define IDS_CUT                             113
+#define IDS_COPY                            114
+#define IDS_PASTE                           115
+#define IDS_DELETE                          116
+#define IDS_PROPERTIES                      117
+#define IDS_FIND                            118
+#define IDS_REPLACE                         119
+#define IDS_HELP                            120
+#define IDS_READY                           121
 
 #define ID_EXIT                             100
 #define ID_ABOUT                            101
@@ -19,12 +39,27 @@
 #define ID_TEST2                            103
 #define ID_TEST3                            104
 #define ID_READY                            105
+#define ID_NEW                              106
+#define ID_OPEN                             107
+#define ID_SAVE                             108
+#define ID_PRINTPREVIEW                     109
+#define ID_PRINT                            110
+#define ID_UNDO                             111
+#define ID_REDO                             112
+#define ID_CUT                              113
+#define ID_COPY                             114
+#define ID_PASTE                            115
+#define ID_DELETE                           116
+#define ID_PROPERTIES                       117
+#define ID_FIND                             118
+#define ID_REPLACE                          119
+#define ID_HELP                             120
 
 #ifdef APSTUDIO_INVOKED
     #ifndef APSTUDIO_READONLY_SYMBOLS
         #define _APS_NO_MFC                 1
         #define _APS_NEXT_RESOURCE_VALUE    101
-        #define _APS_NEXT_COMMAND_VALUE     105
+        #define _APS_NEXT_COMMAND_VALUE     121
         #define _APS_NEXT_CONTROL_VALUE     1000
         #define _APS_NEXT_SYMED_VALUE       300
     #endif

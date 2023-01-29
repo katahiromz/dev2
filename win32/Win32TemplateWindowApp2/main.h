@@ -23,9 +23,12 @@
 #define CLASSNAME TEXT("Win32TemplateWindowApp2")
 #define CANVAS_CLASSNAME TEXT("Win32TemplateWindowApp2 Canvas")
 
+extern HINSTANCE g_hInstance;
+
 // Window IDs
 #define IDW_CANVAS 1
 #define IDW_STATUS 2
+#define IDW_TOOLBAR 3
 
 string_t LoadStringDx(INT id);
 string_t findLocalFile(LPCTSTR filename);
@@ -189,3 +192,7 @@ str_join(const T_STR_CONTAINER& container,
 // Canvas.cpp
 BOOL RegisterCanvasDx(HINSTANCE hInstance);
 HWND CreateCanvasDx(HWND hwnd);
+
+// Toolbar.cpp
+HWND CreateToolbarDx(HWND hwnd);
+void OnToolbarNeedText(LPTOOLTIPTEXT pTTT);

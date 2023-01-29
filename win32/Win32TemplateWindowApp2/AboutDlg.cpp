@@ -1,7 +1,5 @@
 #include "main.h"
 
-extern HINSTANCE g_hInstance;
-
 static BOOL OnInitDialog(HWND hwnd, HWND hwndFocus, LPARAM lParam)
 {
     CenterWindowDx(hwnd);

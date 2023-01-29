@@ -26,15 +26,6 @@ IDI_MAINICON ICON "res/Icon_100.ico"
 #endif
 
 //////////////////////////////////////////////////////////////////////////////
-// RT_STRING
-
-STRINGTABLE
-{
-    IDS_APPNAME, "WindowApp"
-    IDS_READY, "Ready"
-}
-
-//////////////////////////////////////////////////////////////////////////////
 
 LANGUAGE LANG_ENGLISH, SUBLANG_DEFAULT
 
@@ -49,8 +40,11 @@ IDR_MAINMENU MENU
         MENUITEM "Test &2", ID_TEST2
         MENUITEM "Test &3", ID_TEST3
         MENUITEM SEPARATOR
-        MENUITEM "About this application...", ID_ABOUT
         MENUITEM "E&xit\tAlt+F4", ID_EXIT
+    }
+    POPUP "&Help"
+    {
+        MENUITEM "&About...", ID_ABOUT
     }
 }
 
@@ -80,11 +74,69 @@ FONT 9, "MS Shell Dlg"
 }
 
 //////////////////////////////////////////////////////////////////////////////
+// RT_STRING
+
+STRINGTABLE
+{
+    IDS_APPNAME, "WindowApp"
+    IDS_ABOUT, "Show app info"
+    IDS_TEST1, "Do test 1"
+    IDS_TEST2, "Do test 2"
+    IDS_TEST3, "Do test 3"
+    IDS_NEW, "New"
+    IDS_OPEN, "Open"
+    IDS_SAVE, "Save"
+    IDS_PRINTPREVIEW, "Print Preview"
+    IDS_PRINT, "Print"
+    IDS_UNDO, "Undo"
+    IDS_REDO, "Redo"
+    IDS_CUT, "Cut"
+    IDS_COPY, "Copy"
+    IDS_PASTE, "Paste"
+    IDS_DELETE, "Delete"
+    IDS_PROPERTIES, "Properties"
+    IDS_FIND, "Find"
+    IDS_REPLACE, "Replace"
+    IDS_HELP, "Help"
+    IDS_READY, "Ready"
+}
+
+//////////////////////////////////////////////////////////////////////////////
 
 LANGUAGE LANG_JAPANESE, SUBLANG_DEFAULT
 
 //////////////////////////////////////////////////////////////////////////////
+// RT_MENU
+
+IDR_MAINMENU MENU
+{
+    POPUP "ファイル(&F)"
+    {
+        MENUITEM "テスト&1", ID_TEST1
+        MENUITEM "テスト&2", ID_TEST2
+        MENUITEM "テスト&3", ID_TEST3
+        MENUITEM SEPARATOR
+        MENUITEM "終了(&X)\tAlt+F4", ID_EXIT
+    }
+    POPUP "ヘルプ(&H)"
+    {
+        MENUITEM "バージョン情報(&A)...", ID_ABOUT
+    }
+}
+
+//////////////////////////////////////////////////////////////////////////////
 // RT_DIALOG
+
+IDD_ABOUT DIALOG 0, 0, 215, 85
+CAPTION "バージョン情報"
+STYLE DS_CENTER | DS_MODALFRAME | WS_POPUPWINDOW | WS_CAPTION
+FONT 9, "MS UI Gothic"
+{
+    ICON IDI_MAINICON, ico1, 11, 10, 0, 0
+    LTEXT "Window Application Version 0.0\r\nCopyright (C) 2023 Someone.\r\nAll Rights Reserved.", -1, 41, 11, 163, 32
+    DEFPUSHBUTTON "OK", IDOK, 51, 62, 60, 14
+    PUSHBUTTON "キャンセル", IDCANCEL, 119, 61, 60, 14
+}
 
 IDD_INPUTBOX DIALOG 0, 0, 210, 130
 CAPTION "入力して下さい"
@@ -95,6 +147,34 @@ FONT 9, "MS UI Gothic"
     EDITTEXT edt1, 5, 90, 200, 15, ES_AUTOHSCROLL
     DEFPUSHBUTTON "OK", IDOK, 80, 110, 60, 15
     PUSHBUTTON "キャンセル", IDCANCEL, 145, 110, 60, 15
+}
+
+//////////////////////////////////////////////////////////////////////////////
+// RT_STRING
+
+STRINGTABLE
+{
+    IDS_APPNAME, "WindowApp"
+    IDS_ABOUT, "バージョン情報"
+    IDS_TEST1, "テスト1"
+    IDS_TEST2, "テスト2"
+    IDS_TEST3, "テスト3"
+    IDS_NEW, "新規作成"
+    IDS_OPEN, "開く"
+    IDS_SAVE, "上書き保存"
+    IDS_PRINTPREVIEW, "印刷プレビュー"
+    IDS_PRINT, "印刷"
+    IDS_UNDO, "元に戻す"
+    IDS_REDO, "やり直す"
+    IDS_CUT, "切り取り"
+    IDS_COPY, "コピー"
+    IDS_PASTE, "貼り付け"
+    IDS_DELETE, "削除"
+    IDS_PROPERTIES, "プロパティ"
+    IDS_FIND, "検索"
+    IDS_REPLACE, "置換"
+    IDS_HELP, "ヘルプ"
+    IDS_READY, "準備完了"
 }
 
 //////////////////////////////////////////////////////////////////////////////

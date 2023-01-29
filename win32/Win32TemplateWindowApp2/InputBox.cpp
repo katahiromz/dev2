@@ -1,7 +1,5 @@
 #include "main.h"
 
-extern HINSTANCE g_hInstance;
-
 typedef struct INPUTBOX
 {
     string_t m_text;

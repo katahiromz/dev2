@@ -1,7 +1,5 @@
 #include "main.h"
 
-extern HINSTANCE g_hInstance;
-
 static BOOL OnEraseBkgnd(HWND hwnd, HDC hdc)
 {
     RECT rc;

@@ -29,6 +29,7 @@ add_executable(Win32TemplateWindowApp2 WIN32
     AboutDlg.cpp
     Canvas.cpp
     InputBox.cpp
+    Toolbar.cpp
     utils.cpp)
 target_link_libraries(Win32TemplateWindowApp2 comctl32 comdlg32 shell32 shlwapi)
 
