@@ -24,7 +24,7 @@ void OnCommand(HWND hwnd, int id, HWND hwndCtl, UINT codeNotify)
     case ID_TEST1:
     case ID_TEST2:
     case ID_TEST3:
-        MessageBox(hwnd, TEXT("This is a test."), LoadStringDx(IDS_APPNAME).c_str(), MB_ICONINFORMATION);
+        MsgBoxDx(hwnd, TEXT("This is a test."), LoadStringDx(IDS_APPNAME).c_str());
         break;
     case ID_EXIT:
         ::DestroyWindow(hwnd);

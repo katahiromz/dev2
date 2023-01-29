@@ -2,6 +2,7 @@
 #include <cstdio>
 #include <cstring>
 #include <string>
+#include <cassert>
 
 #include <windows.h>
 #include <windowsx.h>
@@ -20,5 +21,8 @@
 
 string_t LoadStringDx(INT id);
 VOID AppAboutDx(HWND hwnd);
+
+VOID CenterWindowDx(HWND hwnd);
+INT MsgBoxDx(HWND hwnd, LPCTSTR text, LPCTSTR title, UINT uType = MB_ICONINFORMATION);
 
 #define CLASSNAME TEXT("Win32TemplateWindowApp")
