@@ -7,12 +7,23 @@
 cmake_minimum_required(VERSION 3.0)
 
 # project name and languages
-project(win32template C CXX)
+project(Win32TemplateDialogApp C CXX)
 
 ##############################################################################
 
-# win32template.exe
-add_executable(win32template main.cpp)
-target_link_libraries(win32template comctl32 comdlg32 shell32 shlwapi)
+# Visual C++?
+if(MSVC)
+    add_definitions(-DMSVC=1)
+endif()
+
+# Unicode?
+option(USE_UNICODE "Use Unicode" OFF)
+if(USE_UNICODE)
+    add_definitions(-DUNICODE -D_UNICODE)
+endif()
+
+# Win32TemplateDialogApp.exe
+add_executable(Win32TemplateDialogApp WIN32 main.cpp main_res.rc)
+target_link_libraries(Win32TemplateDialogApp comctl32 comdlg32 shell32 shlwapi)
 
 ##############################################################################
