@@ -54,5 +54,6 @@ add_subdirectory(ShellExecute)
 add_subdirectory(Win32TemplateConsoleApp)
 add_subdirectory(Win32TemplateDialogApp)
 add_subdirectory(Win32TemplateWindowApp)
+add_subdirectory(Win32TemplateWindowApp2)
 
 ##############################################################################
