@@ -288,6 +288,25 @@ void OnCommand(HWND hwnd, int id, HWND hwndCtl, UINT codeNotify)
         break;
     case ID_READY:
         break;
+    case ID_OPENREADME:
+        {
+            string_t file = findLocalFile(TEXT("README.txt"));
+            if (file.size())
+            {
+                ShellExecute(hwnd, NULL, file.c_str(), NULL, NULL, SW_SHOWNORMAL);
+            }
+        }
+        break;
+    case ID_OPENLICENSE:
+        {
+            string_t file = findLocalFile(TEXT("LICENSE.txt"));
+            if (file.size())
+            {
+                ShellExecute(hwnd, NULL, file.c_str(), NULL, NULL, SW_SHOWNORMAL);
+            }
+        }
+        break;
+        break;
     }
     s_cLock--;
 

@@ -67,12 +67,14 @@
 #define ID_VIEW_TOOLBAR                     121
 #define ID_VIEW_STATUSBAR                   122
 #define ID_SAVEAS                           123
+#define ID_OPENREADME                       124
+#define ID_OPENLICENSE                      125
 
 #ifdef APSTUDIO_INVOKED
     #ifndef APSTUDIO_READONLY_SYMBOLS
         #define _APS_NO_MFC                 1
         #define _APS_NEXT_RESOURCE_VALUE    102
-        #define _APS_NEXT_COMMAND_VALUE     124
+        #define _APS_NEXT_COMMAND_VALUE     126
         #define _APS_NEXT_CONTROL_VALUE     1000
         #define _APS_NEXT_SYMED_VALUE       300
     #endif

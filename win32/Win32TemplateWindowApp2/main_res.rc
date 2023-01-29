@@ -65,6 +65,9 @@ IDR_MAINMENU MENU
     }
     POPUP "&Help"
     {
+        MENUITEM "Open &README.txt", ID_OPENREADME
+        MENUITEM "Open &LICENSE.txt", ID_OPENLICENSE
+        MENUITEM SEPARATOR
         MENUITEM "&About...", ID_ABOUT
     }
 }
@@ -161,6 +164,9 @@ IDR_MAINMENU MENU
     }
     POPUP "ヘルプ(&H)"
     {
+        MENUITEM "&README.txtを開く", ID_OPENREADME
+        MENUITEM "&LICENSE.txtを開く", ID_OPENLICENSE
+        MENUITEM SEPARATOR
         MENUITEM "バージョン情報(&A)...", ID_ABOUT
     }
 }
