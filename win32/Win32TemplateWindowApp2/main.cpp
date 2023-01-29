@@ -24,6 +24,18 @@ BOOL CreateStatusBarDx(HWND hwnd)
     return (g_hStatusBar != NULL);
 }
 
+BOOL DoLoadSettings(HWND hwnd)
+{
+    // TODO: Load settings from registry
+    return TRUE;
+}
+
+BOOL DoSaveSettings(HWND hwnd)
+{
+    // TODO: Save settings to registry
+    return TRUE;
+}
+
 BOOL OnCreate(HWND hwnd, LPCREATESTRUCT lpCreateStruct)
 {
     g_hMainWnd = hwnd;
@@ -47,6 +59,8 @@ BOOL OnCreate(HWND hwnd, LPCREATESTRUCT lpCreateStruct)
     g_hCanvasWnd = CreateCanvasDx(hwnd);
     if (!g_hCanvasWnd)
         return FALSE;
+
+    DoLoadSettings(hwnd);
 
     ::PostMessage(hwnd, WM_SIZE, 0, 0);
     ::PostMessage(hwnd, WM_COMMAND, ID_READY, 0);
@@ -335,6 +349,8 @@ void OnInitMenuPopup(HWND hwnd, HMENU hMenu, UINT item, BOOL fSystemMenu)
 
 void OnDestroy(HWND hwnd)
 {
+    DoSaveSettings(hwnd);
+
     if (g_hStatusBar)
     {
         ::DestroyWindow(g_hStatusBar);
