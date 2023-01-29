@@ -86,7 +86,7 @@ void OnTest3(HWND hwnd)
     }
 }
 
-BOOL UpdateAppTitleDx(HWND hwnd, LPCTSTR pszFile = g_szFile)
+BOOL UpdateFileInfoDx(HWND hwnd, LPCTSTR pszFile = g_szFile)
 {
     assert(pszFile != NULL);
 
@@ -111,7 +111,7 @@ BOOL DoLoadFile(HWND hwnd, LPCTSTR pszFile)
     // TODO: Load a file
     MsgBoxDx(hwnd, pszFile, TEXT("DoLoadFile"));
 
-    UpdateAppTitleDx(hwnd, pszFile);
+    UpdateFileInfoDx(hwnd, pszFile);
     return TRUE;
 }
 
@@ -120,13 +120,13 @@ BOOL DoSaveFile(HWND hwnd, LPCTSTR pszFile)
     // TODO: Save a file
     MsgBoxDx(hwnd, pszFile, TEXT("DoSaveFile"));
 
-    UpdateAppTitleDx(hwnd, pszFile);
+    UpdateFileInfoDx(hwnd, pszFile);
     return TRUE;
 }
 
 void OnNew(HWND hwnd)
 {
-    UpdateAppTitleDx(hwnd, TEXT(""));
+    UpdateFileInfoDx(hwnd, TEXT(""));
 }
 
 void OnOpen(HWND hwnd)
