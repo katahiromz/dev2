@@ -83,11 +83,15 @@ void DebugPrintfW(const wchar_t *fmt, ...);
 
 inline void str_trim(LPSTR text, LPCSTR spaces = " \t\r\n")
 {
+    assert(text != NULL);
+    assert(spaces != NULL);
     StrTrimA(text, spaces);
 }
 
 inline void str_trim(LPWSTR text, LPCWSTR spaces = L" \t\r\n\x3000")
 {
+    assert(text != NULL);
+    assert(spaces != NULL);
     StrTrimW(text, spaces);
 }
 
