@@ -29,3 +29,23 @@ INT MsgBoxDx(HWND hwnd, LPCTSTR text, LPCTSTR title, UINT uType = MB_ICONINFORMA
 
 RECT WorkAreaFromWindowDx(HWND hwnd);
 SIZE SizeFromRectDx(LPCRECT prc);
+
+std::wstring WideFromAnsi(UINT codepage, LPCSTR ansi);
+std::string AnsiFromWide(UINT codepage, LPCWSTR wide);
+
+inline std::string AnsiFromAnsi(UINT codepage, LPCSTR ansi) { return ansi; }
+inline std::wstring WideFromWide(UINT codepage, LPCWSTR wide) { return wide; }
+
+#ifdef UNICODE
+    #define TextFromText WideFromWide
+    #define TextFromAnsi WideFromAnsi
+    #define TextFromWide WideFromWide
+    #define AnsiFromText AnsiFromWide
+    #define WideFromText WideFromWide
+#else
+    #define TextFromText AnsiFromAnsi
+    #define TextFromAnsi AnsiFromAnsi
+    #define TextFromWide AnsiFromWide
+    #define AnsiFromText AnsiFromAnsi
+    #define WideFromText WideFromAnsi
+#endif

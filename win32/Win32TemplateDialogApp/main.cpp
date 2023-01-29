@@ -31,6 +31,22 @@ string_t LoadStringDx(INT id)
     return text;
 }
 
+std::wstring WideFromAnsi(UINT codepage, LPCSTR ansi)
+{
+    WCHAR wide[1024];
+    ::MultiByteToWideChar(codepage, 0, ansi, -1, wide, _countof(wide));
+    wide[_countof(wide) - 1] = 0; // Avoid buffer overrun
+    return wide;
+}
+
+std::string AnsiFromWide(UINT codepage, LPCWSTR wide)
+{
+    char ansi[1024];
+    ::WideCharToMultiByte(codepage, 0, wide, -1, ansi, _countof(ansi), NULL, NULL);
+    ansi[_countof(ansi) - 2] = ansi[_countof(ansi) - 1] = 0; // Avoid buffer overrun
+    return ansi;
+}
+
 BOOL OnInitDialog(HWND hwnd, HWND hwndFocus, LPARAM lParam)
 {
     g_hMainWnd = hwnd;
