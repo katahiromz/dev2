@@ -14,6 +14,16 @@
 LANGUAGE LANG_NEUTRAL, SUBLANG_NEUTRAL
 
 //////////////////////////////////////////////////////////////////////////////
+// RT_ACCELERATOR
+
+IDR_ACCEL ACCELERATORS
+{
+    "N", ID_EXIT, CONTROL, VIRTKEY
+    "O", ID_OPEN, CONTROL, VIRTKEY
+    "S", ID_SAVE, CONTROL, VIRTKEY
+}
+
+//////////////////////////////////////////////////////////////////////////////
 // RT_GROUP_ICON
 
 IDI_MAINICON ICON "res/Icon_100.ico"
@@ -36,6 +46,12 @@ IDR_MAINMENU MENU
 {
     POPUP "&File"
     {
+        MENUITEM "&New\tCtrl+N", ID_NEW
+        MENUITEM SEPARATOR
+        MENUITEM "&Open\tCtrl+O", ID_OPEN
+        MENUITEM "&Save\tCtrl+S", ID_SAVE
+        MENUITEM "Save &As...", ID_SAVEAS
+        MENUITEM SEPARATOR
         MENUITEM "Test &1", ID_TEST1
         MENUITEM "Test &2", ID_TEST2
         MENUITEM "Test &3", ID_TEST3
@@ -106,6 +122,13 @@ STRINGTABLE
     IDS_VIEW_TOOLBAR, "Toolbar"
     IDS_VIEW_STATUSBAR, "Status Bar"
     IDS_READY, "Ready"
+    IDS_BUSY, "Executing command..."
+    IDS_SAVEAS, "Save As"
+    IDS_OPENFILTER, "Text Files (*.txt)|*.txt|All Files (*.*)|*.*|"
+    IDS_SAVEFILTER, "Text Files (*.txt)|*.txt|All Files (*.*)|*.*|"
+    IDS_OPENTITLE, "Open a file"
+    IDS_SAVETITLE, "Save the file"
+    IDS_APP_TITLE, "WindowApp - %s"
 }
 
 //////////////////////////////////////////////////////////////////////////////
@@ -119,6 +142,12 @@ IDR_MAINMENU MENU
 {
     POPUP "ファイル(&F)"
     {
+        MENUITEM "新規作成(&N)\tCtrl+N", ID_NEW
+        MENUITEM SEPARATOR
+        MENUITEM "開く(&O)\tCtrl+O", ID_OPEN
+        MENUITEM "上書き保存(&S)\tCtrl+S", ID_SAVE
+        MENUITEM "名前を付けて保存(&A)...", ID_SAVEAS
+        MENUITEM SEPARATOR
         MENUITEM "テスト&1", ID_TEST1
         MENUITEM "テスト&2", ID_TEST2
         MENUITEM "テスト&3", ID_TEST3
@@ -189,6 +218,13 @@ STRINGTABLE
     IDS_VIEW_TOOLBAR, "ツールバー"
     IDS_VIEW_STATUSBAR, "ステータス バー"
     IDS_READY, "準備完了"
+    IDS_BUSY, "コマンド実行中..."
+    IDS_SAVEAS, "名前を付けて保存"
+    IDS_OPENFILTER, "テキスト ファイル (*.txt)|*.txt|すべてのファイル (*.*)|*.*|"
+    IDS_SAVEFILTER, "テキスト ファイル (*.txt)|*.txt|すべてのファイル (*.*)|*.*|"
+    IDS_OPENTITLE, "ファイルを開く"
+    IDS_SAVETITLE, "ファイルを保存する"
+    IDS_APP_TITLE, "WindowApp - %s"
 }
 
 //////////////////////////////////////////////////////////////////////////////

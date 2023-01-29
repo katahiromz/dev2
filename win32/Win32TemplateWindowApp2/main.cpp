@@ -7,6 +7,7 @@ HWND g_hStatusBar = NULL;
 HWND g_hToolbar = NULL;
 BOOL g_bShowToolbar = TRUE;
 BOOL g_bShowStatusBar = TRUE;
+TCHAR g_szFile[MAX_PATH] = TEXT("");
 
 string_t LoadStringDx(INT id)
 {
@@ -71,13 +72,173 @@ void OnTest3(HWND hwnd)
     }
 }
 
+BOOL UpdateAppTitleDx(HWND hwnd, LPCTSTR pszFile = g_szFile)
+{
+    assert(pszFile != NULL);
+
+    if (pszFile[0])
+    {
+        string_t format = LoadStringDx(IDS_APP_TITLE);
+        TCHAR text[MAX_PATH + 128];
+        StringCchPrintf(text, _countof(text), format.c_str(), PathFindFileName(pszFile));
+        SetWindowText(hwnd, text);
+    }
+    else
+    {
+        SetWindowText(hwnd, LoadStringDx(IDS_APPNAME).c_str());
+    }
+
+    StringCchCopy(g_szFile, _countof(g_szFile), pszFile);
+    return TRUE;
+}
+
+BOOL DoLoadFile(HWND hwnd, LPCTSTR pszFile)
+{
+    // TODO: Load a file
+    MsgBoxDx(hwnd, pszFile, TEXT("DoLoadFile"));
+
+    UpdateAppTitleDx(hwnd, pszFile);
+    return TRUE;
+}
+
+BOOL DoSaveFile(HWND hwnd, LPCTSTR pszFile)
+{
+    // TODO: Save a file
+    MsgBoxDx(hwnd, pszFile, TEXT("DoSaveFile"));
+
+    UpdateAppTitleDx(hwnd, pszFile);
+    return TRUE;
+}
+
+void OnNew(HWND hwnd)
+{
+    UpdateAppTitleDx(hwnd, TEXT(""));
+}
+
+void OnOpen(HWND hwnd)
+{
+    OPENFILENAME ofn = { sizeof(ofn), hwnd };
+
+    string_t filter = LoadStringDx(IDS_OPENFILTER);
+    for (auto& ch : filter)
+    {
+        if (ch == L'|')
+            ch = 0;
+    }
+    ofn.lpstrFilter = filter.c_str();
+
+    TCHAR szFile[MAX_PATH] = TEXT("");
+    ofn.lpstrFile = szFile;
+    ofn.nMaxFile = _countof(szFile);
+
+    string_t title = LoadStringDx(IDS_OPENTITLE);
+    ofn.lpstrTitle = title.c_str();
+
+    ofn.Flags = OFN_EXPLORER | OFN_ENABLESIZING | OFN_FILEMUSTEXIST | OFN_PATHMUSTEXIST | OFN_HIDEREADONLY;
+    ofn.lpstrDefExt = TEXT("txt");
+
+    if (GetOpenFileName(&ofn))
+    {
+        DoLoadFile(hwnd, szFile);
+    }
+}
+
+void OnSaveAs(HWND hwnd)
+{
+    OPENFILENAME ofn = { sizeof(ofn), hwnd };
+
+    string_t filter = LoadStringDx(IDS_OPENFILTER);
+    for (auto& ch : filter)
+    {
+        if (ch == L'|')
+            ch = 0;
+    }
+    ofn.lpstrFilter = filter.c_str();
+
+    TCHAR szFile[MAX_PATH] = TEXT("");
+    ofn.lpstrFile = szFile;
+    ofn.nMaxFile = _countof(szFile);
+
+    string_t title = LoadStringDx(IDS_SAVETITLE);
+    ofn.lpstrTitle = title.c_str();
+
+    ofn.Flags = OFN_EXPLORER | OFN_ENABLESIZING | OFN_FILEMUSTEXIST | OFN_PATHMUSTEXIST | OFN_OVERWRITEPROMPT;
+    ofn.lpstrDefExt = TEXT("txt");
+
+    if (::GetSaveFileName(&ofn))
+    {
+        DoSaveFile(hwnd, szFile);
+    }
+}
+
+void OnSave(HWND hwnd)
+{
+    if (g_szFile[0])
+        DoSaveFile(hwnd, g_szFile);
+    else
+        OnSaveAs(hwnd);
+}
+
 void OnCommand(HWND hwnd, int id, HWND hwndCtl, UINT codeNotify)
 {
     static INT s_cLock = 0;
 
+    if (s_cLock == 0)
+    {
+        ::SendMessage(g_hStatusBar, SB_SETTEXT, 0 | 0, (LPARAM)LoadStringDx(IDS_BUSY).c_str());
+    }
+
     s_cLock++;
     switch (id)
     {
+    case ID_NEW:
+        OnNew(hwnd);
+        break;
+    case ID_OPEN:
+        OnOpen(hwnd);
+        break;
+    case ID_SAVE:
+        OnSave(hwnd);
+        break;
+    case ID_SAVEAS:
+        OnSaveAs(hwnd);
+        break;
+    case ID_PRINTPREVIEW:
+        assert(0);
+        break;
+    case ID_PRINT:
+        assert(0);
+        break;
+    case ID_UNDO:
+        assert(0);
+        break;
+    case ID_REDO:
+        assert(0);
+        break;
+    case ID_CUT:
+        assert(0);
+        break;
+    case ID_COPY:
+        assert(0);
+        break;
+    case ID_PASTE:
+        assert(0);
+        break;
+    case ID_DELETE:
+        assert(0);
+        break;
+    case ID_PROPERTIES:
+        assert(0);
+        break;
+    case ID_FIND:
+        assert(0);
+        break;
+    case ID_REPLACE:
+        assert(0);
+        break;
+    case ID_HELP:
+        assert(0);
+        break;
     case ID_TEST1:
         OnTest1(hwnd);
         break;
@@ -256,12 +417,18 @@ INT Run(HINSTANCE hInstance, INT nCmdShow)
     ::ShowWindow(g_hMainWnd, nCmdShow);
     ::UpdateWindow(g_hMainWnd);
 
+    HACCEL hAccel = ::LoadAccelerators(hInstance, MAKEINTRESOURCE(IDR_ACCEL));
+
     MSG msg;
     while (::GetMessage(&msg, NULL, 0, 0))
     {
+        if (hAccel && ::TranslateAccelerator(g_hMainWnd, hAccel, &msg))
+            continue;
         ::TranslateMessage(&msg);
         ::DispatchMessage(&msg);
     }
+
+    ::DestroyAcceleratorTable(hAccel);
 
     return (INT)msg.wParam;
 }

@@ -9,6 +9,7 @@
 #define IDI_MAINICON                        100
 
 #define IDR_MAINMENU                        100
+#define IDR_ACCEL                           101
 
 #define IDS_APPNAME                         100
 #define IDS_EXIT                            101
@@ -34,6 +35,13 @@
 #define IDS_VIEW_TOOLBAR                    121
 #define IDS_VIEW_STATUSBAR                  122
 #define IDS_READY                           123
+#define IDS_BUSY                            124
+#define IDS_SAVEAS                          125
+#define IDS_OPENFILTER                      126
+#define IDS_SAVEFILTER                      127
+#define IDS_OPENTITLE                       128
+#define IDS_SAVETITLE                       129
+#define IDS_APP_TITLE                       130
 
 #define ID_EXIT                             100
 #define ID_ABOUT                            101
@@ -58,12 +66,13 @@
 #define ID_HELP                             120
 #define ID_VIEW_TOOLBAR                     121
 #define ID_VIEW_STATUSBAR                   122
+#define ID_SAVEAS                           123
 
 #ifdef APSTUDIO_INVOKED
     #ifndef APSTUDIO_READONLY_SYMBOLS
         #define _APS_NO_MFC                 1
-        #define _APS_NEXT_RESOURCE_VALUE    101
-        #define _APS_NEXT_COMMAND_VALUE     123
+        #define _APS_NEXT_RESOURCE_VALUE    102
+        #define _APS_NEXT_COMMAND_VALUE     124
         #define _APS_NEXT_CONTROL_VALUE     1000
         #define _APS_NEXT_SYMED_VALUE       300
     #endif
