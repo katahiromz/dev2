@@ -29,23 +29,23 @@ BOOL OnCreate(HWND hwnd, LPCREATESTRUCT lpCreateStruct)
     if (!CreateStatusBarDx(hwnd))
         return FALSE;
 
-    g_hCanvasWnd = CreateCanvasDx(hwnd);
-    if (!g_hCanvasWnd)
-        return FALSE;
-
-    g_hToolbar = CreateToolbarDx(hwnd);
-    if (!g_hToolbar)
-        return FALSE;
-
     if (g_bShowStatusBar)
     {
         ::ShowWindow(g_hStatusBar, SW_SHOWNOACTIVATE);
     }
 
+    g_hToolbar = CreateToolbarDx(hwnd);
+    if (!g_hToolbar)
+        return FALSE;
+
     if (g_bShowToolbar)
     {
         ::ShowWindow(g_hToolbar, SW_SHOWNOACTIVATE);
     }
+
+    g_hCanvasWnd = CreateCanvasDx(hwnd);
+    if (!g_hCanvasWnd)
+        return FALSE;
 
     ::PostMessage(hwnd, WM_SIZE, 0, 0);
     ::PostMessage(hwnd, WM_COMMAND, ID_READY, 0);
