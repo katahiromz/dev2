@@ -16,6 +16,54 @@ std::string AnsiFromWide(UINT codepage, LPCWSTR wide)
     return ansi;
 }
 
+//#define LOG_FILE "log.txt"
+
+void DebugOutputA(const char *text)
+{
+#ifdef LOG_FILE
+    if (FILE *fout = fopen(LOG_FILE, "a"))
+    {
+        fprintf(fout, "%s", text);
+        fclose(fout);
+    }
+#else
+    ::OutputDebugStringA(text);
+#endif
+}
+
+void DebugOutputW(const wchar_t *text)
+{
+#ifdef LOG_FILE
+    if (FILE *fout = fopen(LOG_FILE, "ab"))
+    {
+        fwrite(text, sizeof(wchar_t), lstrlenW(text), fout);
+        fclose(fout);
+    }
+#else
+    ::OutputDebugStringW(text);
+#endif
+}
+
+void DebugPrintfA(const char *fmt, ...)
+{
+    va_list va;
+    char buf[1024];
+    va_start(va, fmt);
+    StringCchVPrintfA(buf, _countof(buf), fmt, va);
+    DebugOutputA(buf);
+    va_end(va);
+}
+
+void DebugPrintfW(const wchar_t *fmt, ...)
+{
+    va_list va;
+    wchar_t buf[1024];
+    va_start(va, fmt);
+    StringCchVPrintfW(buf, _countof(buf), fmt, va);
+    DebugOutputW(buf);
+    va_end(va);
+}
+
 VOID RepositionPointDx(LPPOINT ppt, SIZE siz, LPCRECT prc)
 {
     if (ppt->x + siz.cx > prc->right)

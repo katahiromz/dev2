@@ -10,6 +10,7 @@
 #include <commdlg.h>
 #include <shlwapi.h>
 #include <tchar.h>
+#include <strsafe.h>
 
 #include "resource.h"
 
@@ -48,4 +49,32 @@ inline std::wstring WideFromWide(UINT codepage, LPCWSTR wide) { return wide; }
     #define TextFromWide AnsiFromWide
     #define AnsiFromText AnsiFromAnsi
     #define WideFromText WideFromAnsi
+#endif
+
+void DebugOutputA(const char *text);
+void DebugOutputW(const wchar_t *text);
+void DebugPrintfA(const char *fmt, ...);
+void DebugPrintfW(const wchar_t *fmt, ...);
+#ifdef UNICODE
+    #define DebugOutput DebugOutputW
+    #define DebugPrintf DebugPrintfW
+#else
+    #define DebugOutput DebugOutputA
+    #define DebugPrintf DebugPrintfA
+#endif
+
+#ifdef NDEBUG
+    #define DOUT(text) /*empty*/
+    #define DOUTA(text) /*empty*/
+    #define DOUTW(text) /*empty*/
+    #define DPRINT(fmt, ...) /*empty*/
+    #define DPRINTA(fmt, ...) /*empty*/
+    #define DPRINTW(fmt, ...) /*empty*/
+#else
+    #define DOUT DebugOutput
+    #define DOUTA DebugOutputA
+    #define DOUTW DebugOutputW
+    #define DPRINT DebugPrintf
+    #define DPRINTA DebugPrintfA
+    #define DPRINTW DebugPrintfW
 #endif
