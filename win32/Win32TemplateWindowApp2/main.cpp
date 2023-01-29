@@ -128,6 +128,7 @@ BOOL DoSaveFile(HWND hwnd, LPCTSTR pszFile)
 
 void OnNew(HWND hwnd)
 {
+    // TODO: New file
     UpdateFileInfoDx(hwnd, TEXT(""));
 }
 
@@ -272,19 +273,19 @@ void OnCommand(HWND hwnd, int id, HWND hwndCtl, UINT codeNotify)
         break;
     case ID_VIEW_TOOLBAR:
         if (IsWindowVisible(g_hToolbar))
-            ShowWindow(g_hToolbar, SW_HIDE);
+            ::ShowWindow(g_hToolbar, SW_HIDE);
         else
-            ShowWindow(g_hToolbar, SW_SHOWNOACTIVATE);
-        g_bShowToolbar = IsWindowVisible(g_hToolbar);
-        PostMessage(hwnd, WM_SIZE, 0, 0);
+            ::ShowWindow(g_hToolbar, SW_SHOWNOACTIVATE);
+        g_bShowToolbar = ::IsWindowVisible(g_hToolbar);
+        ::PostMessage(hwnd, WM_SIZE, 0, 0);
         break;
     case ID_VIEW_STATUSBAR:
-        if (IsWindowVisible(g_hStatusBar))
-            ShowWindow(g_hStatusBar, SW_HIDE);
+        if (::IsWindowVisible(g_hStatusBar))
+            ::ShowWindow(g_hStatusBar, SW_HIDE);
         else
-            ShowWindow(g_hStatusBar, SW_SHOWNOACTIVATE);
-        g_bShowStatusBar = IsWindowVisible(g_hStatusBar);
-        PostMessage(hwnd, WM_SIZE, 0, 0);
+            ::ShowWindow(g_hStatusBar, SW_SHOWNOACTIVATE);
+        g_bShowStatusBar = ::IsWindowVisible(g_hStatusBar);
+        ::PostMessage(hwnd, WM_SIZE, 0, 0);
         break;
     case ID_READY:
         break;
@@ -293,7 +294,7 @@ void OnCommand(HWND hwnd, int id, HWND hwndCtl, UINT codeNotify)
             string_t file = findLocalFile(TEXT("README.txt"));
             if (file.size())
             {
-                ShellExecute(hwnd, NULL, file.c_str(), NULL, NULL, SW_SHOWNORMAL);
+                ::ShellExecute(hwnd, NULL, file.c_str(), NULL, NULL, SW_SHOWNORMAL);
             }
         }
         break;
@@ -302,7 +303,7 @@ void OnCommand(HWND hwnd, int id, HWND hwndCtl, UINT codeNotify)
             string_t file = findLocalFile(TEXT("LICENSE.txt"));
             if (file.size())
             {
-                ShellExecute(hwnd, NULL, file.c_str(), NULL, NULL, SW_SHOWNORMAL);
+                ::ShellExecute(hwnd, NULL, file.c_str(), NULL, NULL, SW_SHOWNORMAL);
             }
         }
         break;
