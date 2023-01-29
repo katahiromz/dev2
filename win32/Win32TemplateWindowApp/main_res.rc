@@ -67,6 +67,35 @@ FONT 9, "MS Shell Dlg"
     PUSHBUTTON "Cancel", IDCANCEL, 119, 61, 60, 14
 }
 
+IDD_INPUTBOX DIALOG 0, 0, 210, 130
+CAPTION "Please input"
+STYLE DS_CENTER | DS_MODALFRAME | WS_POPUPWINDOW | WS_CAPTION
+FONT 9, "MS Shell Dlg"
+{
+    LTEXT "Please input a text string:", stc1, 5, 5, 200, 80
+    EDITTEXT edt1, 5, 90, 200, 15, ES_AUTOHSCROLL
+    DEFPUSHBUTTON "OK", IDOK, 80, 110, 60, 15
+    PUSHBUTTON "Cancel", IDCANCEL, 145, 110, 60, 15
+}
+
+//////////////////////////////////////////////////////////////////////////////
+
+LANGUAGE LANG_JAPANESE, SUBLANG_DEFAULT
+
+//////////////////////////////////////////////////////////////////////////////
+// RT_DIALOG
+
+IDD_INPUTBOX DIALOG 0, 0, 210, 130
+CAPTION "入力して下さい"
+STYLE DS_CENTER | DS_MODALFRAME | WS_POPUPWINDOW | WS_CAPTION
+FONT 9, "MS UI Gothic"
+{
+    LTEXT "テキスト文字列を入力して下さい：", stc1, 5, 5, 200, 80
+    EDITTEXT edt1, 5, 90, 200, 15, ES_AUTOHSCROLL
+    DEFPUSHBUTTON "OK", IDOK, 80, 110, 60, 15
+    PUSHBUTTON "キャンセル", IDCANCEL, 145, 110, 60, 15
+}
+
 //////////////////////////////////////////////////////////////////////////////
 // TEXTINCLUDE
 

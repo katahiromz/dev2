@@ -23,7 +23,12 @@ if(USE_UNICODE)
 endif()
 
 # Win32TemplateWindowApp.exe
-add_executable(Win32TemplateWindowApp WIN32 main.cpp main_res.rc AboutDlg.cpp utils.cpp)
+add_executable(Win32TemplateWindowApp WIN32
+    main.cpp
+    main_res.rc
+    AboutDlg.cpp
+    InputBox.cpp
+    utils.cpp)
 target_link_libraries(Win32TemplateWindowApp comctl32 comdlg32 shell32 shlwapi)
 
 ##############################################################################

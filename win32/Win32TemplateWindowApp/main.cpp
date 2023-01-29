@@ -17,14 +17,37 @@ BOOL OnCreate(HWND hwnd, LPCREATESTRUCT lpCreateStruct)
     return TRUE;
 }
 
+void OnTest1(HWND hwnd)
+{
+    MsgBoxDx(hwnd, TEXT("This is a test."), LoadStringDx(IDS_APPNAME).c_str());
+}
+
+void OnTest2(HWND hwnd)
+{
+    MsgBoxDx(hwnd, TEXT("This is a test."), LoadStringDx(IDS_APPNAME).c_str());
+}
+
+void OnTest3(HWND hwnd)
+{
+    string_t text;
+    if (InputBoxDx(hwnd, text))
+    {
+        MsgBoxDx(hwnd, text.c_str(), LoadStringDx(IDS_APPNAME).c_str());
+    }
+}
+
 void OnCommand(HWND hwnd, int id, HWND hwndCtl, UINT codeNotify)
 {
     switch (id)
     {
     case ID_TEST1:
+        OnTest1(hwnd);
+        break;
     case ID_TEST2:
+        OnTest2(hwnd);
+        break;
     case ID_TEST3:
-        MsgBoxDx(hwnd, TEXT("This is a test."), LoadStringDx(IDS_APPNAME).c_str());
+        OnTest3(hwnd);
         break;
     case ID_EXIT:
         ::DestroyWindow(hwnd);

@@ -4,6 +4,7 @@
 // main_res.rc
 
 #define IDD_ABOUT                           100
+#define IDD_INPUTBOX                        101
 
 #define IDI_MAINICON                        100
 
