@@ -1,21 +1,5 @@
 #include "main.h"
 
-std::wstring WideFromAnsi(UINT codepage, LPCSTR ansi)
-{
-    WCHAR wide[1024];
-    ::MultiByteToWideChar(codepage, 0, ansi, -1, wide, _countof(wide));
-    wide[_countof(wide) - 1] = 0; // Avoid buffer overrun
-    return wide;
-}
-
-std::string AnsiFromWide(UINT codepage, LPCWSTR wide)
-{
-    char ansi[1024];
-    ::WideCharToMultiByte(codepage, 0, wide, -1, ansi, _countof(ansi), NULL, NULL);
-    ansi[_countof(ansi) - 2] = ansi[_countof(ansi) - 1] = 0; // Avoid buffer overrun
-    return ansi;
-}
-
 //#define LOG_FILE "log.txt"
 
 void DebugOutputA(const char *text)
@@ -62,6 +46,22 @@ void DebugPrintfW(const wchar_t *fmt, ...)
     StringCchVPrintfW(buf, _countof(buf), fmt, va);
     DebugOutputW(buf);
     va_end(va);
+}
+
+std::wstring WideFromAnsi(UINT codepage, LPCSTR ansi)
+{
+    WCHAR wide[1024];
+    ::MultiByteToWideChar(codepage, 0, ansi, -1, wide, _countof(wide));
+    wide[_countof(wide) - 1] = 0; // Avoid buffer overrun
+    return wide;
+}
+
+std::string AnsiFromWide(UINT codepage, LPCWSTR wide)
+{
+    char ansi[1024];
+    ::WideCharToMultiByte(codepage, 0, wide, -1, ansi, _countof(ansi), NULL, NULL);
+    ansi[_countof(ansi) - 2] = ansi[_countof(ansi) - 1] = 0; // Avoid buffer overrun
+    return ansi;
 }
 
 VOID RepositionPointDx(LPPOINT ppt, SIZE siz, LPCRECT prc)
