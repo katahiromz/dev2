@@ -26,4 +26,6 @@ VOID AppAboutDx(HWND hwnd);
 
 VOID CenterWindowDx(HWND hwnd);
 INT MsgBoxDx(HWND hwnd, LPCTSTR text, LPCTSTR title, UINT uType = MB_ICONINFORMATION);
+
 RECT WorkAreaFromWindowDx(HWND hwnd);
+SIZE SizeFromRectDx(LPCRECT prc);

@@ -28,6 +28,14 @@ RECT WorkAreaFromWindowDx(HWND hwnd)
     return rc;
 }
 
+SIZE SizeFromRectDx(LPCRECT prc)
+{
+    SIZE siz;
+    siz.cx = prc->right - prc->left;
+    siz.cy = prc->bottom - prc->top;
+    return siz;
+}
+
 VOID CenterWindowDx(HWND hwnd)
 {
     assert(IsWindow(hwnd));
@@ -48,15 +56,11 @@ VOID CenterWindowDx(HWND hwnd)
     else
         rcParent = rcWorkArea;
 
-    SIZE sizParent;
-    sizParent.cx = rcParent.right - rcParent.left;
-    sizParent.cy = rcParent.bottom - rcParent.top;
+    SIZE sizParent = SizeFromRectDx(&rcParent);
 
     RECT rc;
     ::GetWindowRect(hwnd, &rc);
-    SIZE siz;
-    siz.cx = rc.right - rc.left;
-    siz.cy = rc.bottom - rc.top;
+    SIZE siz = SizeFromRectDx(&rc);
 
     POINT pt;
     pt.x = rcParent.left + (sizParent.cx - siz.cx) / 2;
