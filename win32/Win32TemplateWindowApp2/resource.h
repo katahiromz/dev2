@@ -31,7 +31,9 @@
 #define IDS_FIND                            118
 #define IDS_REPLACE                         119
 #define IDS_HELP                            120
-#define IDS_READY                           121
+#define IDS_VIEW_TOOLBAR                    121
+#define IDS_VIEW_STATUSBAR                  122
+#define IDS_READY                           123
 
 #define ID_EXIT                             100
 #define ID_ABOUT                            101
@@ -54,12 +56,14 @@
 #define ID_FIND                             118
 #define ID_REPLACE                          119
 #define ID_HELP                             120
+#define ID_VIEW_TOOLBAR                     121
+#define ID_VIEW_STATUSBAR                   122
 
 #ifdef APSTUDIO_INVOKED
     #ifndef APSTUDIO_READONLY_SYMBOLS
         #define _APS_NO_MFC                 1
         #define _APS_NEXT_RESOURCE_VALUE    101
-        #define _APS_NEXT_COMMAND_VALUE     121
+        #define _APS_NEXT_COMMAND_VALUE     123
         #define _APS_NEXT_CONTROL_VALUE     1000
         #define _APS_NEXT_SYMED_VALUE       300
     #endif

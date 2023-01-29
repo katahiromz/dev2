@@ -42,6 +42,11 @@ IDR_MAINMENU MENU
         MENUITEM SEPARATOR
         MENUITEM "E&xit\tAlt+F4", ID_EXIT
     }
+    POPUP "&View"
+    {
+        MENUITEM "&Toolbar", ID_VIEW_TOOLBAR
+        MENUITEM "&Status Bar", ID_VIEW_STATUSBAR
+    }
     POPUP "&Help"
     {
         MENUITEM "&About...", ID_ABOUT
@@ -98,6 +103,8 @@ STRINGTABLE
     IDS_FIND, "Find"
     IDS_REPLACE, "Replace"
     IDS_HELP, "Help"
+    IDS_VIEW_TOOLBAR, "Toolbar"
+    IDS_VIEW_STATUSBAR, "Status Bar"
     IDS_READY, "Ready"
 }
 
@@ -117,6 +124,11 @@ IDR_MAINMENU MENU
         MENUITEM "テスト&3", ID_TEST3
         MENUITEM SEPARATOR
         MENUITEM "終了(&X)\tAlt+F4", ID_EXIT
+    }
+    POPUP "表示(&V)"
+    {
+        MENUITEM "ツールバー(&T)", ID_VIEW_TOOLBAR
+        MENUITEM "ステータス バー(&S)", ID_VIEW_STATUSBAR
     }
     POPUP "ヘルプ(&H)"
     {
@@ -174,6 +186,8 @@ STRINGTABLE
     IDS_FIND, "検索"
     IDS_REPLACE, "置換"
     IDS_HELP, "ヘルプ"
+    IDS_VIEW_TOOLBAR, "ツールバー"
+    IDS_VIEW_STATUSBAR, "ステータス バー"
     IDS_READY, "準備完了"
 }
 

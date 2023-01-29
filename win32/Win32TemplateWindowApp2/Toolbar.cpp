@@ -132,5 +132,11 @@ void OnToolbarNeedText(LPTOOLTIPTEXT pTTT)
     case ID_HELP:
         pTTT->lpszText = MAKEINTRESOURCE(IDS_HELP);
         break;
+    case ID_VIEW_TOOLBAR:
+        pTTT->lpszText = MAKEINTRESOURCE(IDS_VIEW_TOOLBAR);
+        break;
+    case ID_VIEW_STATUSBAR:
+        pTTT->lpszText = MAKEINTRESOURCE(IDS_VIEW_STATUSBAR);
+        break;
     }
 }

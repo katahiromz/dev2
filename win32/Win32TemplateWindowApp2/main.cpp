@@ -6,6 +6,7 @@ HWND g_hCanvasWnd = NULL;
 HWND g_hStatusBar = NULL;
 HWND g_hToolbar = NULL;
 BOOL g_bShowToolbar = TRUE;
+BOOL g_bShowStatusBar = TRUE;
 
 string_t LoadStringDx(INT id)
 {
@@ -17,7 +18,7 @@ string_t LoadStringDx(INT id)
 
 BOOL CreateStatusBarDx(HWND hwnd)
 {
-    DWORD style = WS_VISIBLE | WS_CHILD;
+    DWORD style = WS_CHILD;
     g_hStatusBar = ::CreateStatusWindow(style, NULL, hwnd, IDW_STATUS);
     return (g_hStatusBar != NULL);
 }
@@ -35,6 +36,11 @@ BOOL OnCreate(HWND hwnd, LPCREATESTRUCT lpCreateStruct)
     g_hToolbar = CreateToolbarDx(hwnd);
     if (!g_hToolbar)
         return FALSE;
+
+    if (g_bShowStatusBar)
+    {
+        ::ShowWindow(g_hStatusBar, SW_SHOWNOACTIVATE);
+    }
 
     if (g_bShowToolbar)
     {
@@ -87,6 +93,22 @@ void OnCommand(HWND hwnd, int id, HWND hwndCtl, UINT codeNotify)
     case ID_ABOUT:
         AppAboutDx(hwnd);
         break;
+    case ID_VIEW_TOOLBAR:
+        if (IsWindowVisible(g_hToolbar))
+            ShowWindow(g_hToolbar, SW_HIDE);
+        else
+            ShowWindow(g_hToolbar, SW_SHOWNOACTIVATE);
+        g_bShowToolbar = IsWindowVisible(g_hToolbar);
+        PostMessage(hwnd, WM_SIZE, 0, 0);
+        break;
+    case ID_VIEW_STATUSBAR:
+        if (IsWindowVisible(g_hStatusBar))
+            ShowWindow(g_hStatusBar, SW_HIDE);
+        else
+            ShowWindow(g_hStatusBar, SW_SHOWNOACTIVATE);
+        g_bShowStatusBar = IsWindowVisible(g_hStatusBar);
+        PostMessage(hwnd, WM_SIZE, 0, 0);
+        break;
     case ID_READY:
         break;
     }
@@ -120,15 +142,34 @@ void OnSize(HWND hwnd, UINT state, int cx, int cy)
     ::SendMessage(g_hStatusBar, WM_SIZE, 0, 0);
     ::SendMessage(g_hToolbar, TB_AUTOSIZE, 0, 0);
 
-    RECT rcStatus;
-    ::GetWindowRect(g_hStatusBar, &rcStatus);
-    rc.bottom -= rcStatus.bottom - rcStatus.top;
+    if (::IsWindowVisible(g_hStatusBar))
+    {
+        RECT rcStatus;
+        ::GetWindowRect(g_hStatusBar, &rcStatus);
+        rc.bottom -= rcStatus.bottom - rcStatus.top;
+    }
 
-    RECT rcTool;
-    ::GetWindowRect(g_hToolbar, &rcTool);
-    rc.top += rcTool.bottom - rcTool.top;
+    if (::IsWindowVisible(g_hToolbar))
+    {
+        RECT rcTool;
+        ::GetWindowRect(g_hToolbar, &rcTool);
+        rc.top += rcTool.bottom - rcTool.top;
+    }
 
     ::MoveWindow(g_hCanvasWnd, rc.left, rc.top, rc.right - rc.left, rc.bottom - rc.top, TRUE);
+}
+
+void OnInitMenuPopup(HWND hwnd, HMENU hMenu, UINT item, BOOL fSystemMenu)
+{
+    if (::IsWindowVisible(g_hStatusBar))
+        ::CheckMenuItem(hMenu, ID_VIEW_STATUSBAR, MF_CHECKED);
+    else
+        ::CheckMenuItem(hMenu, ID_VIEW_STATUSBAR, MF_UNCHECKED);
+
+    if (::IsWindowVisible(g_hToolbar))
+        ::CheckMenuItem(hMenu, ID_VIEW_TOOLBAR, MF_CHECKED);
+    else
+        ::CheckMenuItem(hMenu, ID_VIEW_TOOLBAR, MF_UNCHECKED);
 }
 
 void OnDestroy(HWND hwnd)
@@ -160,6 +201,7 @@ WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
         HANDLE_MSG(hwnd, WM_COMMAND, OnCommand);
         HANDLE_MSG(hwnd, WM_NOTIFY, OnNotify);
         HANDLE_MSG(hwnd, WM_SIZE, OnSize);
+        HANDLE_MSG(hwnd, WM_INITMENUPOPUP, OnInitMenuPopup);
         HANDLE_MSG(hwnd, WM_DESTROY, OnDestroy);
     default:
         return ::DefWindowProc(hwnd, uMsg, wParam, lParam);
