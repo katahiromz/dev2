@@ -7,7 +7,7 @@ void DebugOutputA(const char *text)
 #ifdef LOG_FILE
     if (FILE *fout = fopen(LOG_FILE, "a"))
     {
-        fprintf(fout, "%s", text);
+        fputs(text, fout);
         fclose(fout);
     }
 #else
