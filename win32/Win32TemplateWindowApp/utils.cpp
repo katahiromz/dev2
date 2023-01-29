@@ -75,8 +75,7 @@ VOID CenterWindowDx(HWND hwnd)
         RepositionPointDx(&pt, siz, &rcWorkArea);
     }
 
-    ::SetWindowPos(hwnd, NULL, pt.x, pt.y, 0, 0,
-                   SWP_NOSIZE | SWP_NOZORDER | SWP_NOACTIVATE);
+    ::SetWindowPos(hwnd, NULL, pt.x, pt.y, 0, 0, SWP_NOSIZE | SWP_NOZORDER | SWP_NOACTIVATE);
 }
 
 static LRESULT CALLBACK
@@ -95,7 +94,7 @@ _msgBoxCbtProcDx(INT nCode, WPARAM wParam, LPARAM lParam)
     return 0;   // allow the operation
 }
 
-static HHOOK HookCenterMsgBoxDx(BOOL bHook)
+static HHOOK _hookCenterMsgBoxDx(BOOL bHook)
 {
     static HHOOK s_hHook = NULL;
     if (bHook)
@@ -121,8 +120,8 @@ static HHOOK HookCenterMsgBoxDx(BOOL bHook)
 
 INT MsgBoxDx(HWND hwnd, LPCTSTR text, LPCTSTR title, UINT uType)
 {
-    HookCenterMsgBoxDx(TRUE);
+    _hookCenterMsgBoxDx(TRUE);
     INT nID = ::MessageBox(hwnd, text, title, uType);
-    HookCenterMsgBoxDx(FALSE);
+    _hookCenterMsgBoxDx(FALSE);
     return nID;
 }

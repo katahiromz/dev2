@@ -19,10 +19,11 @@
     typedef std::string string_t;
 #endif
 
+#define CLASSNAME TEXT("Win32TemplateWindowApp")
+
 string_t LoadStringDx(INT id);
 VOID AppAboutDx(HWND hwnd);
 
 VOID CenterWindowDx(HWND hwnd);
 INT MsgBoxDx(HWND hwnd, LPCTSTR text, LPCTSTR title, UINT uType = MB_ICONINFORMATION);
-
-#define CLASSNAME TEXT("Win32TemplateWindowApp")
+RECT WorkAreaFromWindowDx(HWND hwnd);
