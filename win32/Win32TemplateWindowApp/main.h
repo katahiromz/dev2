@@ -23,6 +23,8 @@
 #define CLASSNAME TEXT("Win32TemplateWindowApp")
 
 string_t LoadStringDx(INT id);
+string_t findLocalFile(LPCTSTR filename);
+
 VOID AppAboutDx(HWND hwnd);
 
 VOID CenterWindowDx(HWND hwnd);

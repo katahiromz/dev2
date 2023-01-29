@@ -193,3 +193,37 @@ INT MsgBoxDx(HWND hwnd, LPCTSTR text, LPCTSTR title, UINT uType)
     _hookCenterMsgBoxDx(FALSE);
     return nID;
 }
+
+string_t findLocalFile(LPCTSTR filename)
+{
+    assert(filename != NULL);
+    assert(filename[0] != 0);
+
+    TCHAR szPath[MAX_PATH];
+    GetModuleFileName(NULL, szPath, _countof(szPath));
+
+    TCHAR dir[MAX_PATH];
+    StringCchCopy(dir, _countof(dir), szPath);
+    PathRemoveFileSpec(dir);
+
+    StringCchCopy(szPath, _countof(szPath), dir);
+    PathAppend(szPath, filename);
+    if (PathFileExists(szPath))
+        return szPath;
+
+    StringCchCopy(szPath, _countof(szPath), dir);
+    PathRemoveFileSpec(szPath);
+    PathAppend(szPath, filename);
+    if (PathFileExists(szPath))
+        return szPath;
+
+    StringCchCopy(szPath, _countof(szPath), dir);
+    PathRemoveFileSpec(szPath);
+    PathRemoveFileSpec(szPath);
+    PathAppend(szPath, filename);
+    if (PathFileExists(szPath))
+        return szPath;
+
+    assert(0);
+    return TEXT("");
+}
