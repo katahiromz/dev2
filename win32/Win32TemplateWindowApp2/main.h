@@ -24,6 +24,7 @@
 #define CANVAS_CLASSNAME TEXT("Win32TemplateWindowApp2 Canvas")
 
 extern HINSTANCE g_hInstance;
+extern TCHAR g_szFile[MAX_PATH];
 
 // Window IDs
 #define IDW_CANVAS 1

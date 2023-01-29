@@ -19,7 +19,7 @@ static void OnPaint(HWND hwnd)
     {
         ::Ellipse(hdc, rc.left, rc.top, rc.right, rc.bottom);
         UINT uFormat = DT_SINGLELINE | DT_CENTER | DT_VCENTER;
-        ::DrawText(hdc, TEXT("WindowApp"), -1, &rc, uFormat);
+        ::DrawText(hdc, ::PathFindFileName(g_szFile), -1, &rc, uFormat);
         ::EndPaint(hwnd, &ps);
     }
 }

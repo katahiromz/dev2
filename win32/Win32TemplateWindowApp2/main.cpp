@@ -95,14 +95,16 @@ BOOL UpdateFileInfoDx(HWND hwnd, LPCTSTR pszFile = g_szFile)
         string_t format = LoadStringDx(IDS_APP_TITLE);
         TCHAR text[MAX_PATH + 128];
         StringCchPrintf(text, _countof(text), format.c_str(), PathFindFileName(pszFile));
-        SetWindowText(hwnd, text);
+        ::SetWindowText(hwnd, text);
     }
     else
     {
-        SetWindowText(hwnd, LoadStringDx(IDS_APPNAME).c_str());
+        ::SetWindowText(hwnd, LoadStringDx(IDS_APPNAME).c_str());
     }
 
     StringCchCopy(g_szFile, _countof(g_szFile), pszFile);
+
+    ::InvalidateRect(g_hCanvasWnd, NULL, TRUE);
     return TRUE;
 }
 
