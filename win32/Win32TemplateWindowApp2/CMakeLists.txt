@@ -7,7 +7,7 @@
 cmake_minimum_required(VERSION 3.0)
 
 # project name and languages
-project(Win32TemplateWindowApp2 C CXX)
+project(Win32TemplateWindowApp2 C CXX RC)
 
 ##############################################################################
 

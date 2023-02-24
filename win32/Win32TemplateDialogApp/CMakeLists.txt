@@ -7,7 +7,7 @@
 cmake_minimum_required(VERSION 3.0)
 
 # project name and languages
-project(Win32TemplateDialogApp C CXX)
+project(Win32TemplateDialogApp C CXX RC)
 
 ##############################################################################
 
